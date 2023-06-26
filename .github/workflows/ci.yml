@@ -195,6 +195,9 @@ jobs:
           retention-days: 90 # retention period for the artifact in days. Link to the documentation - https://docs.github.com/en/actions/guides/storing-workflow-data-as-artifacts#about-workflow-artifact-retention
 
   build-and-publish-docker-image: # job to build the docker image and publish it to the GitHub Container Registry
+    # add a production environment to the job
+    environment: 
+      name: production
     runs-on: ubuntu-latest # using the latest ubuntu runner
     needs: [build, unit-parallel-tests] # this job needs build and unit-parallel-tests jobs as a requirement to run
     if: github.ref == 'refs/heads/main' # run this job only when the branch is main branch and not on pull requests or other branches - https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
